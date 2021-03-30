@@ -1,0 +1,43 @@
+{
+  "Id": "321992",
+  "Url": "/coins/ada/overview",
+  "ImageUrl": "/media/37746235/ada.png",
+  "ContentCreatedOn": 1507247613,
+  "Name": "ADA",
+  "Symbol": "ADA",
+  "CoinName": "Cardano",
+  "FullName": "Cardano (ADA)",
+  "Description": "Designed and developed by IOHK in conjunction with the University of Edinburgh, the University of Athens and the University of Connecticut, Cardano SL (or Cardano Settlement Layer) is a Proof of Stake cryptocurrency based on the Haskell implementation of the white paper “Ouroboros: A Provably Secure Proof of Stake Blockchain Protocol” by Aggelos Kiayias, Alexander Russell, Bernardo David and Roman Oliynykov.Blockchain data provided by: Blockchair",
+  "AssetTokenStatus": "N/A",
+  "Algorithm": "Ouroboros",
+  "ProofType": "PoS",
+  "SortOrder": "1635",
+  "Sponsored": false,
+  "Taxonomy": {
+    "Access": "Permissioned",
+    "FCA": "Utility",
+    "FINMA": "Utility",
+    "Industry": "Blockchain-Specific Application",
+    "CollateralizedAsset": "No",
+    "CollateralizedAssetType": "",
+    "CollateralType": "",
+    "CollateralInfo": ""
+  },
+  "Rating": {
+    "Weiss": {
+      "Rating": "B-",
+      "TechnologyAdoptionRating": "B-",
+      "MarketPerformanceRating": "B"
+    }
+  },
+  "IsTrading": true,
+  "TotalCoinsMined": 32006023798.238956,
+  "BlockNumber": 5526872,
+  "NetHashesPerSecond": 0,
+  "BlockReward": 0,
+  "BlockTime": 0,
+  "AssetLaunchDate": "2017-10-05",
+  "MaxSupply": 45000000000,
+  "MktCapPenalty": 0,
+  "PlatformType": "blockchain"
+}

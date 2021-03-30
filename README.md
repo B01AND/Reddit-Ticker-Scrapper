@@ -67,3 +67,22 @@ Ticker                                              Company  Frequency
     CS       Credit Suisse Group American Depositary Shares         11
     IT                            Gartner Inc. Common Stock         10
 ```
+### Crypto Tickers Example
+To find crypto tickers supply
+```
+➜ poetry run ./main.py -t data/crypto_tickers.csv SatoshiStreetBets
+Searching r/SatoshiStreetBets...
+Ticker                 Coin Name  Frequency
+   GET Guaranteed Entrance Token         23
+   BSC                  BowsCoin         22
+   ETH                  Ethereum         18
+   NFT                       NFT         18
+  STPT               STP Network         11
+  HOGE              Hoge Finance         10
+   UBX              UBIX Network          9
+   BNB              Binance Coin          8
+   BTT                BitTorrent          8
+   BOG                   Bogcoin          7
+```
+#### Refreshing Crypto Tickers
+Run `poetry run ./get_crypto_tickers.py`, it will pull the latest crypto tickers and write to `data/crypto_tickers.csv`.
