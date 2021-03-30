@@ -17,7 +17,7 @@ Install poetry (Windows)
 
 ### Install Dependencies
 ```bash
-poetry install
+poetry install --no-dev
 ```
 
 ### Reddit API Setup
@@ -31,20 +31,24 @@ CLIENT_SECRET='<YOUR CLIENT SECRET>'
 ## Usage
 ```
 ➜ poetry run ./main.py --help
-Usage: main.py [OPTIONS] [SUBREDDIT]
+Usage: main.py [OPTIONS] SUBREDDIT
 
   Search SUBREDDIT for most mentioned tickers.
 
 Options:
-  --post-limit INTEGER RANGE      Number of posts to parse.
-  --comment-limit INTEGER RANGE   Number of comments to parse in each post.
-  --num-top-tickers INTEGER RANGE
+  -p, --post-limit INTEGER RANGE  Number of posts to parse.
+  -c, --comment-limit INTEGER RANGE
+                                  Number of comments to parse in each post. -1
+                                  to parse all comments, 0 to parse no
+                                  comments.
+
+  -n, --num-top-tickers INTEGER RANGE
                                   Number of top tickers to print.
-  --excluded PATH                 Text file containing words that are excluded
+  -e, --excluded PATH             Text file containing words that are excluded
                                   because they are mistaken as tickers.
 
-  --tickers PATH                  CSV containing all tickers.
-  --output PATH                   The filename of the csv of ticker counts.
+  -t, --tickers PATH              CSV containing all tickers.
+  -o, --output PATH               The filename of the csv of ticker counts.
   --help                          Show this message and exit.
 ```
 ### Example
