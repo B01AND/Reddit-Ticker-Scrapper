@@ -1,8 +1,8 @@
-# Reddit Ticker Scrapper
+# Reddit Ticker Scrapper 🚀
 
 Search a given subreddit for the most mentioned tickers.
 
-## Setup
+## Setup 🔨
 
 ### Prerequisites
 Install poetry (Linux)
@@ -28,7 +28,7 @@ CLIENT_ID='<YOUR CLIENT ID>'
 CLIENT_SECRET='<YOUR CLIENT SECRET>'
 ```
 
-## Usage
+## Usage 📖
 ```
 ➜ poetry run ./main.py --help
 Usage: main.py [OPTIONS] SUBREDDIT
