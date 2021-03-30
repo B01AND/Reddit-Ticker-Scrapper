@@ -68,7 +68,7 @@ Ticker                                              Company  Frequency
     IT                            Gartner Inc. Common Stock         10
 ```
 ### Crypto Tickers Example
-To find crypto tickers supply
+To find crypto tickers supply the crypto tickers csv via the `-t` option.
 ```
 ➜ poetry run ./main.py -t data/crypto_tickers.csv SatoshiStreetBets
 Searching r/SatoshiStreetBets...
