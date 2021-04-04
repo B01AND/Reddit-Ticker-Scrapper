@@ -14,7 +14,7 @@ import pandas as pd
 from dotenv import dotenv_values
 from praw import Reddit
 
-regex = re.compile(r'[^\$a-zA-Z ]')
+regex = re.compile(r"[^\$a-zA-Z ]")
 
 
 def increment_count(frequencies: Dict[str, int], word: str) -> None:
@@ -43,7 +43,7 @@ def preprocess_text(text: str) -> List[str]:
     Returns:
         The list of words extracted from the text.
     """
-    return regex.sub('', text).split(' ')
+    return regex.sub("", text).split(" ")
 
 
 def count_words(excluded_words: Set, frequencies: Dict[str, int], words: List[str]) -> None:
@@ -55,7 +55,7 @@ def count_words(excluded_words: Set, frequencies: Dict[str, int], words: List[st
         words: List of words to be counted.
     """
     for word in words:
-        if word.startswith('$'):  # words that starts with $ are tickers and should not be exclueded
+        if word.startswith("$"):  # words that starts with $ are tickers and should not be exclueded
             increment_count(frequencies, word[1:])
         elif word in excluded_words:
             pass
@@ -73,11 +73,18 @@ def filter_tickers(frequencies: Dict[str, int], ticker_df: pd.DataFrame) -> pd.D
     Returns:
         Dataframe of tickers that have at least 1 occurance and their occurance frequency.
     """
-    word_df = pd.DataFrame.from_dict(frequencies.items()).rename(columns={0: 'Ticker', 1: 'Frequency'})
-    return pd.merge(ticker_df, word_df, on='Ticker').sort_values('Frequency', ascending=False)
+    word_df = pd.DataFrame.from_dict(frequencies.items()).rename(columns={0: "Ticker", 1: "Frequency"})
+    return pd.merge(ticker_df, word_df, on="Ticker").sort_values("Frequency", ascending=False)
 
 
-def find_tickers(reddit: Reddit, excluded_words: Set, ticker_df: pd.DataFrame, subreddit: str, post_limit: int, comment_limit: int) -> pd.DataFrame:
+def find_tickers(
+    reddit: Reddit,
+    excluded_words: Set,
+    ticker_df: pd.DataFrame,
+    subreddit: str,
+    post_limit: int,
+    comment_limit: int,
+) -> pd.DataFrame:
     """Find tickers from subreddit.
 
     Tickers written in lowercase will not be found.
@@ -95,7 +102,7 @@ def find_tickers(reddit: Reddit, excluded_words: Set, ticker_df: pd.DataFrame, s
     """
     frequencies: Dict[str, int] = {}
     for post in reddit.subreddit(subreddit).hot(limit=post_limit):
-        words = preprocess_text(f'{post.title} {post.selftext}')
+        words = preprocess_text(f"{post.title} {post.selftext}")
         count_words(excluded_words, frequencies, words)
 
         post.comments.replace_more(limit=0)  # only process post top level comments
@@ -110,38 +117,76 @@ def find_tickers(reddit: Reddit, excluded_words: Set, ticker_df: pd.DataFrame, s
 
 
 @click.command()
-@click.option('--post-limit', '-p', type=click.IntRange(min=1), default=50, help='Number of posts to parse.')
-@click.option('--comment-limit',
-              '-c',
-              type=click.IntRange(min=-1),
-              default=1000,
-              help='Number of comments to parse in each post. -1 to parse all comments, 0 to parse no comments.')
-@click.option('--num-top-tickers', '-n', type=click.IntRange(min=1), default=10, help='Number of top tickers to print.')
-@click.option('--excluded',
-              '-e',
-              type=click.Path(exists=True),
-              default='./data/excluded.txt',
-              help='Text file containing words that are excluded because they are mistaken as tickers.')
-@click.option('--tickers', '-t', type=click.Path(exists=True), default='./data/tickers.csv', help='CSV containing all tickers.')
-@click.option('--output', '-o', type=click.Path(file_okay=True, writable=True), help='The filename of the csv of ticker counts.')
-@click.argument('subreddit', type=str)
+@click.option(
+    "--post-limit",
+    "-p",
+    type=click.IntRange(min=1),
+    default=50,
+    help="Number of posts to parse.",
+)
+@click.option(
+    "--comment-limit",
+    "-c",
+    type=click.IntRange(min=-1),
+    default=1000,
+    help="Number of comments to parse in each post. -1 to parse all comments, 0 to parse no comments.",
+)
+@click.option(
+    "--num-top-tickers",
+    "-n",
+    type=click.IntRange(min=1),
+    default=10,
+    help="Number of top tickers to print.",
+)
+@click.option(
+    "--excluded",
+    "-e",
+    type=click.Path(exists=True),
+    default="./data/excluded.txt",
+    help="Text file containing words that are excluded because they are mistaken as tickers.",
+)
+@click.option(
+    "--tickers",
+    "-t",
+    type=click.Path(exists=True),
+    default="./data/tickers.csv",
+    help="CSV containing all tickers.",
+)
+@click.option(
+    "--output",
+    "-o",
+    type=click.Path(file_okay=True, writable=True),
+    help="The filename of the csv of ticker counts.",
+)
+@click.argument("subreddit", type=str)
 def main(**kwargs):
     """Search SUBREDDIT for most mentioned tickers."""
-    secrets = dotenv_values('.env')
-    reddit = Reddit(client_id=secrets['CLIENT_ID'], client_secret=secrets['CLIENT_SECRET'], user_agent='Scrapper (by /u/PotatoDrug)')
+    secrets = dotenv_values(".env")
+    reddit = Reddit(
+        client_id=secrets["CLIENT_ID"],
+        client_secret=secrets["CLIENT_SECRET"],
+        user_agent="Scrapper (by /u/PotatoDrug)",
+    )
 
-    with open(kwargs['excluded'], 'r') as f:
+    with open(kwargs["excluded"], "r") as f:
         excluded_words = set(f.read().splitlines())
-    ticker_df = pd.read_csv(kwargs['tickers'])
+    ticker_df = pd.read_csv(kwargs["tickers"])
     print(f'Searching r/{kwargs["subreddit"]}...')
 
-    stonks_df = find_tickers(reddit, excluded_words, ticker_df, kwargs['subreddit'], kwargs['post_limit'], kwargs['comment_limit'])
+    stonks_df = find_tickers(
+        reddit,
+        excluded_words,
+        ticker_df,
+        kwargs["subreddit"],
+        kwargs["post_limit"],
+        kwargs["comment_limit"],
+    )
 
-    if kwargs['output'] is not None:
-        stonks_df.to_csv(kwargs['output'], index=False)
+    if kwargs["output"] is not None:
+        stonks_df.to_csv(kwargs["output"], index=False)
 
-    print(stonks_df.head(kwargs['num_top_tickers']).to_string(index=False))
+    print(stonks_df.head(kwargs["num_top_tickers"]).to_string(index=False))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
