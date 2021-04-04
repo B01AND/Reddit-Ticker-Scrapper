@@ -30,7 +30,7 @@ CLIENT_SECRET='<YOUR CLIENT SECRET>'
 
 ## Usage 📖
 ```
-➜ poetry run ./main.py --help
+➜ poetry run ./reddit_ticker_scrapper/reddit_ticker_scrapper.py --help
 Usage: main.py [OPTIONS] SUBREDDIT
 
   Search SUBREDDIT for most mentioned tickers.
@@ -53,7 +53,7 @@ Options:
 ```
 ### Example
 ```
-➜ poetry run ./main.py wallstreetbets
+➜ poetry run ./reddit_ticker_scrapper/reddit_ticker_scrapper.py wallstreetbets
 Searching r/wallstreetbets...
 Ticker                                              Company  Frequency
    GME                    GameStop Corporation Common Stock        341
@@ -70,7 +70,7 @@ Ticker                                              Company  Frequency
 ### Crypto Tickers Example
 To find crypto tickers supply
 ```
-➜ poetry run ./main.py -t data/crypto_tickers.csv SatoshiStreetBets
+➜ poetry run ./reddit_ticker_scrapper/reddit_ticker_scrapper.py -t data/crypto_tickers.csv SatoshiStreetBets
 Searching r/SatoshiStreetBets...
 Ticker                 Coin Name  Frequency
    GET Guaranteed Entrance Token         23

@@ -143,9 +143,9 @@ disable=abstract-method,
         useless-object-inheritance,
         useless-suppression,
         using-cmp-argument,
-        wrong-import-order,
         xrange-builtin,
         zip-builtin-not-iterating,
+        C0330, C0326
 
 
 [REPORTS]
@@ -265,7 +265,7 @@ generated-members=
 [FORMAT]
 
 # Maximum number of characters on a single line.
-max-line-length=160
+max-line-length=120
 
 # TODO(https://github.com/PyCQA/pylint/issues/3352): Direct pylint to exempt
 # lines made too long by directives to pytype.
